@@ -1,3 +1,4 @@
+import { error } from "console";
 import dotenv from "dotenv";
 dotenv.config();
 if(!process.env.MONGO_URI){
