@@ -5,8 +5,8 @@ import authMiddleware from "../middleware/auth.middleware.js";
 
 const route= Router();
 
-route.post("/", registerUserController);
+route.post("/register", registerUserController);
 route.post("/login", loginUserController);
-route.post("/logout", logoutUser);
+route.get("/logout", logoutUser);
 route.get("/get-me", authMiddleware, getMeController);
 export default route;
