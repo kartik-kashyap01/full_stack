@@ -1,10 +1,16 @@
 import React from 'react'
+import App_routes from '../app.routes'
+import { AuthProvider } from './features/auth/auth.context'
 
 const App = () => {
   return (
-    <div className='bg-black text-white'>
-      app
+    <AuthProvider>
+      <div >
+      
+     <App_routes></App_routes>
     </div>
+    </AuthProvider>
+    
   )
 }
 
