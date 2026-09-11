@@ -1,7 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Sparkles } from 'lucide-react';
 const Regestration = () => {
+    const [userName, setuserName] = useState()
+    const [email, setEmail] = useState()
+    const [password, setPassword] = useState()
+
+
+
+
   return (
+
+    
     <div>
           <div>
               <div id="login_page" className='bg-[#FFF7ED] h-screen overflow-hidden flex  '>
@@ -23,11 +32,23 @@ const Regestration = () => {
                           <p className='text-gray-600 -mt-3 pb-9'>Look's new here. </p>
                           <div id="inputs" className=' w-[70%] p-1 flex gap-0.5 flex-col items-center justify-center  '>
                               <p className='self-start  font-bold  text font-mono capitalize'>username</p>
-                              <input className=' w-full rounded-sm border p-1 ' type="email" placeholder='enter username' />
+                              <input onChange={
+                              (e)=>{
+                                setuserName(e.target.value)
+                              }
+                              } className=' w-full rounded-sm border p-1 ' value={userName}  placeholder='enter username' />
                               <p className='self-start  font-bold  text font-mono capitalize'>email</p>
-                              <input className=' w-full rounded-sm border p-1 ' type="email" placeholder='enter email' />
+                              <input
+                              onChange={(e)=>{
+                                setEmail(e.target.value)
+                              }}
+                              className=' w-full rounded-sm border p-1 ' value={email} type="email" placeholder='enter email' />
                               <p className='self-start  font-bold mt-3 text font-mono capitalize'>password</p>
-                              <input className=' w-full rounded-sm p-1 border  ' type="password" placeholder='password' />
+                              <input
+                              onChange={(e)=>{
+                                setPassword(e.target.value)
+                              }}
+                              className=' w-full rounded-sm p-1 border  '  value={password} type="password" placeholder='password' />
 
                               <p className='w-full' to='/home' ><button className='w-full rounded-sm bg-[#FF6482] active:bg-[#ffffff]    active:shadow-none p-1 mt-8 font-mono  border shadow-[4px_4px_0px_0px_#000000]'
                               >sign up</button></p>
