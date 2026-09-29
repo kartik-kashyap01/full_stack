@@ -1,17 +1,28 @@
 import React, { useState } from 'react'
 import { Sparkles } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { useAuth } from '../hooks/useAuth';
-
+import { useNavigate } from 'react-router';
 const Login = () => {
-const{loading, handleLogin} = useAuth()
+const{loading, handleLogin } = useAuth()
+
+const navigate = useNavigate();
 const [email, setEmail] = useState("")
 const [password, setPassword] = useState("")
 
-const handleSubmit = async(e)=>{
-  e.preventDefault()
-  handleLogin({email,password})
-}
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const success = await handleLogin({ email, password });
+
+      if (success) {
+        navigate('/');
+      }
+    } catch (error) {
+      console.log("Login failed:", error);
+    }
+  };
 if(loading){
   return(<main><h1>loadinggg...</h1></main>)
 }
@@ -28,11 +39,11 @@ if(loading){
                   <div id="dots"><div id="circle" className='h-2.5 shadow-[2px_2px_0px_0px_#000000] border-2 w-2.5 rounded-[50%]'></div></div>
                   <div id="dots"><div id="circle" className='h-2.5 shadow-[2px_2px_0px_0px_#000000] border-2 w-2.5 rounded-[50%]'></div></div>
                   <div id="dots"><div id="circle" className='h-2.5  shadow-[2px_2px_0px_0px_#000000] border-2 w-2.5 rounded-[50%]'></div></div>
-          </div>
-                <form onSubmit={handleSubmit}>
+          </div>  <div id="star " className='shadow-[4px_4px_0px_0px_#000000] border-2  mb-[5%] rounded-xl bg-[#ff6482] p-3 '><Sparkles /></div>
+                <form >
                   
                   
-                   <div id="star " className='shadow-[4px_4px_0px_0px_#000000] border-2  mb-[5%] rounded-xl bg-[#ff6482] p-3 '><Sparkles /></div>
+                 
                   <div id="login_box" className='border p-4  rounded-xl flex flex-col shadow-[8px_8px_0px_0px_#000000] items-center justify-start w-[30vw]  bg-white'>
                     <pre className='font-bold mt-[3%] text-[3vw] p-3'>Welcome back</pre>
                     <p className='text-gray-600 -mt-3 pb-9'>Log in to keep building. </p>
@@ -55,7 +66,7 @@ if(loading){
                     >Login</button></p>
                     <p className='p-3 font-bold'>OR</p>
                     <button className=' rounded-sm bg-[#B28BFF] active:bg-[#ffffff]    active:shadow-none p-1  font-mono w-full border shadow-[4px_4px_0px_0px_#000000]'>//Continue with gitHub</button>
-                    <pre className='p-3'>New here/- <span className='text-[#0f7bbd] font-bold hover:underline'>create an account</span></pre>
+                <pre className='p-3'>New here/- <span className='text-[#0f7bbd] font-bold hover:underline'><Link to={"/registration"} >create an account </Link>  </span></pre>
                     </div>
                       </div>
                   </form> 

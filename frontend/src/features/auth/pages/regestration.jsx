@@ -1,12 +1,30 @@
 import React, { useState } from 'react'
 import { Sparkles } from 'lucide-react';
+import { useAuth } from '../hooks/useAuth';
+import { useNavigate } from 'react-router';
 const Regestration = () => {
+    const navigate = useNavigate();
+    const {loading,handleRegistration}=  useAuth()
     const [userName, setuserName] = useState()
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
+    try {
+      const success = await handleRegistration({userName, email, password });
 
+      if (success) {
+        navigate('/');
+      }
+    } catch (error) {
+      console.log("Login failed:", error);
+    }
+  };
+  if (loading) {
+    return (<main><h1>loadinggg...</h1></main>)
+  }
 
   return (
 
@@ -36,7 +54,7 @@ const Regestration = () => {
                               (e)=>{
                                 setuserName(e.target.value)
                               }
-                              } className=' w-full rounded-sm border p-1 ' value={userName}  placeholder='enter username' />
+                              } className=' w-full rounded-sm border p-1 ' value={userName} type="text"  placeholder='enter username' />
                               <p className='self-start  font-bold  text font-mono capitalize'>email</p>
                               <input
                               onChange={(e)=>{
@@ -50,7 +68,7 @@ const Regestration = () => {
                               }}
                               className=' w-full rounded-sm p-1 border  '  value={password} type="password" placeholder='password' />
 
-                              <p className='w-full' to='/home' ><button className='w-full rounded-sm bg-[#FF6482] active:bg-[#ffffff]    active:shadow-none p-1 mt-8 font-mono  border shadow-[4px_4px_0px_0px_#000000]'
+                              <p className='w-full' ><button onClick={handleSubmit} className='w-full rounded-sm bg-[#FF6482] active:bg-[#ffffff]    active:shadow-none p-1 mt-8 font-mono  border shadow-[4px_4px_0px_0px_#000000]'
                               >sign up</button></p>
                               <p className='p-3 font-bold'>OR</p>
                               <button className=' rounded-sm bg-[#B28BFF] active:bg-[#ffffff]    active:shadow-none p-1  font-mono w-full border shadow-[4px_4px_0px_0px_#000000]'>//Continue with gitHub</button>
